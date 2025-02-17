@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { api } from '../../api/config/axiosConfig';
 
 function SignupPage(props) {
-    const [ signupInput, setSignupInput ] = useState({  // 초기값 설정
+    const [ signupInput, setSignupInput ] = useState({  // 회원가입 초기값 설정
         username: "",
         password: "",
         name: "",
         email: "",
     });
 
-    const [ errors, setErrors ] = useState({    // error 초기값 설정
+    const [ errors, setErrors ] = useState({    // 각 입력 필드의 error 초기값 설정
         username: "",
         password: "",
         name: "",
@@ -82,7 +82,7 @@ function SignupPage(props) {
 
     return (
         <Box mt={10}>
-            <Container maxWidth={"xs"}>
+            <Container maxWidth={"xs"}> 
                 <Card variant='outlined'>
                     <CardContent>
                         <Typography variant='h4' textAlign={'center'}>회원가입</Typography>

@@ -2,6 +2,8 @@ import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/mate
 import React, { useState } from 'react';
 
 function Signin(props) {
+
+    // 로그인인 초기값 설정
     const [ signinInput, setSigninInput ] = useState({
         username: "",
         password: "",
