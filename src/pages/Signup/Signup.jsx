@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../../api/config/axiosConfig';
 
-function SignupPage(props) {
+function Signup(props) {
     const [ signupInput, setSignupInput ] = useState({  // 회원가입 초기값 설정
         username: "",
         password: "",
@@ -124,4 +124,4 @@ function SignupPage(props) {
     );
 }
 
-export default SignupPage;
+export default Signup;
