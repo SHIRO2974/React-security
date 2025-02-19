@@ -25,6 +25,7 @@ function Signup(props) {
         });
     }
 
+    //  유효성 검사
     const handleInputOnBlur = (e) => {
         const { name, value } = e.target;
         let message = "";
@@ -43,7 +44,7 @@ function Signup(props) {
             message = "올바른 이메일을 입력하세요.";
         }
 
-        // Update error state
+        // 유효성 검사 후 error 상태 업데이트
         setErrors({
             ...errors,
             [name]: message,

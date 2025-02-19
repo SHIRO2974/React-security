@@ -15,52 +15,68 @@ import { useQueryClient } from '@tanstack/react-query';
  */
 
 function SigninPage(props) {
-    const navigate = useNavigate();
-    const queryClient = useQueryClient();
+    const navigate = useNavigate(); // 로그인 시 이동 할 페이지를 결정하는 훅
+    const queryClient = useQueryClient();   // 데이터 캐시 무효화
 
+    //  로그인 초기값 설정
     const [ signinInput, setSigninInput ] = useState({
+
         username: "",
         password: "",
     });
 
+    //  error 초기값 설정
     const [ errors, setErrors ] = useState({
+
         username: "",
         password: "",
     });
 
+    // 로그인 오류가 발생했는지 여부를 나타내는 상태
     const [ isSigninError, setSigninError ] = useState(false);
 
     const handleInputOnBlur = (e) => {
+
         const { name, value } = e.target;
         setErrors(prev => ({
+
             ...prev,
-            [name]: !(value.trim()) ? `${name}을 입력하세요.` : "",
+            [name]: !(value.trim()) ? `${name}을 입력하세요.` : "", 
         }));
     }
 
     const handleSigninInputOnChange = (e) => {
+
         setSigninInput({
+
             ...signinInput,
             [e.target.name]: e.target.value,
         });
     }
 
     const handleSigninButtonOnClick = async () => {
+
+        // 오류 메시지가 있는 경우 로그인 요청을 하지 않음
         if(Object.entries(errors).filter(entry => !!entry[1]).length > 0) {
             return;
         }
 
         try {
+
+            // 로그인 API 요청 보내기
             const response = await api.post("/api/auth/signin", signinInput);
             console.log(response);
 
+            // 응답 받은 access token을 localStorage에 저장
             const accessToken = response.data.data;
             setAccessToken(accessToken);
-            queryClient.invalidateQueries({queryKey: ["userQuery"]});
+            queryClient.invalidateQueries({queryKey: ["userQuery"]});   // 사용자 정보 캐시 무효화
             setSigninError(false);
+
             navigate("/");
             // window.location.href = "/";
         } catch(error) {
+            
             setSigninError(true);
         }
     }
